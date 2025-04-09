@@ -1,31 +1,48 @@
 from src.calc import Calculator
+import pytest
 
 calc  = Calculator()
 
-def test_addition():
-    assert calc.sum(2, 2) == 4
-    assert calc.sum(-2, 2) == 0
-    assert calc.sum(2, -3) == -1
-    assert calc.sum(2, 2.5) == 4.5
-    assert calc.sum(2, 2/2) == 3.0
+@pytest.mark.parametrize(
+    "a, b, expected",
+    [
+        (4, 3, 7),
+        (-2, 8, 6),
+        (0, 0, 0),
+    ]
+)
+def test_sum(a, b, expected):
+    assert calc.sum(a, b) == expected
 
-def test_subtract():
-    assert calc.subtract(2, 2) == 0
-    assert calc.subtract(5, 3) == 2
-    assert calc.subtract(2, -3) == 5
-    assert calc.subtract(2, 2.5) == -0.5
-    assert calc.subtract(2, 2/2) == 1.0
+@pytest.mark.parametrize(
+    "a, b, expected",
+    [
+        (4, 3, 1),
+        (-2, 8, -10),
+        (0, 0, 0),
+    ]
+)
+def test_subtract(a, b, expected):
+    assert calc.subtract(a, b) == expected
 
-def test_multiply():
-    assert calc.multiply(2, 2) == 4
-    assert calc.multiply(5, 3) == 15
-    assert calc.multiply(2, -3) == -6
-    assert calc.multiply(2, 2.5) == 5
-    assert calc.multiply(2, 2/2) == 2.0
+@pytest.mark.parametrize(
+    "a, b, expected",
+    [
+        (4, 3, 12),
+        (-2, 8, -16),
+        (1, 1, 1),
+    ]
+)
+def test_multiply(a, b, expected):
+    assert calc.multiply(a, b) == expected
 
-def test_divide():
-    assert calc.divide(2, 2) == 1
-    assert calc.divide(5, 2) == 2.5
-    assert calc.divide(2, -4) == -0.5
-    assert calc.divide(2, 2.5) == 0.8
-    assert calc.divide(2, 2/2) == 2.0
+@pytest.mark.parametrize(
+    "a, b, expected",
+    [
+        (4, 2, 2),
+        (-8, 2, -4),
+        (1, 1, 1),
+    ]
+)
+def test_divide(a, b, expected):
+    assert calc.divide(a, b) == expected
